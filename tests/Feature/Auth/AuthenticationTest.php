@@ -6,7 +6,6 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 class ExampleTest extends TestCase
 {
@@ -41,6 +40,6 @@ class ExampleTest extends TestCase
         ])->assertStatus(200)->assertJsonStructure([
             'access_token', 'token_type'
         ]);
-        
+
     }
 }

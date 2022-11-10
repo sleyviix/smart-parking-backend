@@ -3,7 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\parkingPlace;
+use App\Models\Size;
+use App\Models\User;
+use Database\Factories\ParkingPlaceFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +19,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+         User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+         User::factory()->create([
+             'name' => 'Test User',
+             'email' => Str::random(10).'@gmail.com',
+         ]);
+
+         $this->call([
+
+             ParkingPlaceSeeder::class,
+             ParkingPriceSeeder::class,
+             ParkingSpotAttributeSeeder::class,
+             ParkingSpotSeeder::class,
+             ReservationSeeder::class,
+             SizeSeeder::class,
+             VehicleSeeder::class,
+        ]);
+
     }
 }

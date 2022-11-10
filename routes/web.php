@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('me', function () {
+    return new \App\Http\Resources\parkingPlaceResourceCollection(\App\Models\parkingPlace::get());
+});

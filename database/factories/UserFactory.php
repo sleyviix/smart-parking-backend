@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => null,
-            'password' => bcrypt('Gulabzari2020@'), // password
+            'password' => bcrypt(\Str::random(10)), // password
             'remember_token' => null,
         ];
     }
@@ -31,7 +31,7 @@ class UserFactory extends Factory
      *
      * @return static
      */
-    public function unverified()
+    public function unverified():Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
