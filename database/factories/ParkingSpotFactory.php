@@ -7,7 +7,7 @@ use App\Models\Size;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\parkingSpot>
+ * @extends Factory<parkingSpot>
  */
 class ParkingSpotFactory extends Factory
 {
@@ -20,7 +20,7 @@ class ParkingSpotFactory extends Factory
     {
         return [
             //
-            'parkingSpot_id' => parkingSpot::factory(),
+            'parking_spot_id' => parkingSpot::factory(),
             'size_id' => Size::inRandomOrder()->first()->id,
             'floor' => rand(0, 15),
             'number' => rand(0, 15),

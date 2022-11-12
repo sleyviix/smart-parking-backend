@@ -5,6 +5,9 @@
 
 
 use App\Http\Controllers\Api\AuthenticationController;
+use App\Http\Controllers\Api\parkingPlaceController;
+use App\Http\Controllers\Api\parkingSpotController;
+use App\Http\Controllers\Api\PayController;
 use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
@@ -34,12 +37,13 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('reservations', [ReservationController::class, 'store']);
     Route::patch('reservations/{reservation}', [ReservationController::class, 'update']);
     Route::delete('reservations/{reservation}', [ReservationController::class, 'delete']);
+    Route::post('/calculate-payment',PayController::class);
 });
 
 Route::middleware(['internal'])->group(function(){
 
-    Route::get('parkingPlace', [\App\Http\Controllers\Api\parkingPlaceController::class, 'index']);
-    Route::get('parkingPlace/{parkingPlace}/spots', [\App\Http\Controllers\Api\parkingSpotController::class, 'index']);
+    Route::get('parkingPlace', [parkingPlaceController::class, 'index']);
+    Route::get('parkingPlace/{parkingPlace}/spots', [parkingSpotController::class, 'index']);
 });
 
 

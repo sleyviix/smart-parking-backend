@@ -1,5 +1,5 @@
 <?php
-//
+
 //
 //use PHPUnit\Framework\TestCase;
 //
@@ -13,10 +13,10 @@
 //        $parkingPlace = \App\Models\parkingPlace::factory()->create();
 //
 //        $parkingSpot = \App\Models\parkingSpot::factory()->create([
-//           'parkingSpot_id' => $parkingPlace->id(),
+//           'parking_spot_id' => $parkingPlace->id(),
 //
 //        ]);
-//        dd($parkingSpot->toArray());
+//        dd($parking_spot_id->toArray());
 //    }
 //
 //}

@@ -25,7 +25,11 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function parkingSpots(): BelongsTo
+
+    /**
+     * @return BelongsTo
+     */
+    public function parkingSpot(): BelongsTo
     {
         return $this->belongsTo(parkingSpot::class, 'spot_id');
     }

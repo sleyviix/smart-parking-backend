@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Reservation;
 use Illuminate\Foundation\Http\FormRequest;
 use phpDocumentor\Reflection\Types\Boolean;
 
-class parkingSpotIndexRequest extends FormRequest
+class CalcPayRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +15,7 @@ class parkingSpotIndexRequest extends FormRequest
      */
     public function authorize():Boolean
     {
-        return true;
+        return $this->user()->can('view', Reservation::find($this->get('reservation_id')));
     }
 
     /**
@@ -26,8 +27,8 @@ class parkingSpotIndexRequest extends FormRequest
     {
         return [
             //
-            'start' => ['sometimes', 'date', 'after_or_equal:now'],
-            'end' => ['sometimes', 'date', 'after:start']
+            'reservation_id' => ['required']
+
         ];
     }
 }
