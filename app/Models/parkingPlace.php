@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Attribute;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\belongsToMany;
@@ -28,7 +28,7 @@ class parkingPlace extends Model
      */
     public function parkingSpots(): HasMany
     {
-        return $this->hasMany(parkingSpot::class,'spot_id');
+        return $this->hasMany(parkingSpot::class,'parking_spot_id');
     }
 
     /**

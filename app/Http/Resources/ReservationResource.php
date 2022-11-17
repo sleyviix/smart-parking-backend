@@ -16,7 +16,7 @@ class ReservationResource extends JsonResource
     {
         return [
             'id'         => $this->id,
-            'spot_id'    => $this->parking_spot_id,
+            'parking_spot_id'    => $this->parking_spot_id,
             'start'      => $this->start,
             'end'        => $this->end,
             'paid_at'    => $this->paid_at,

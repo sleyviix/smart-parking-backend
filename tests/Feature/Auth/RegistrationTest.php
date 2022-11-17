@@ -3,8 +3,7 @@
 namespace Tests\Feature\Auth;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
-use Database\Factories\UserFactory;
-use http\Client\Curl\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -56,7 +55,7 @@ class RegistrationTest extends TestCase
 
         $email = 'sulemancontact@yahoo.com';
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'email' => $email,
         ]);
 
