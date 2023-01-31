@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateParkingSpotAttribute extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('parking_spot_attributes', function (Blueprint $table) {
+        Schema::create('parking_spot_attribute', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\parkingPlace::class);
-            $table->foreignIdFor(\App\Models\parkingSpotAttribute::class);
+            $table->foreignIdFor(\App\Models\SpotAttribute::class);
             $table->integer('hourly_price')->comment('£');
             $table->timestamps();
-
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parking_spot_attributes');
+        Schema::dropIfExists('parking_spot_attribute');
     }
 };
