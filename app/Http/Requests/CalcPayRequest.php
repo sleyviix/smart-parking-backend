@@ -13,7 +13,7 @@ class CalcPayRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize():Boolean
+    public function authorize():bool
     {
         return $this->user()->can('view', Reservation::find($this->get('reservation_id')));
     }

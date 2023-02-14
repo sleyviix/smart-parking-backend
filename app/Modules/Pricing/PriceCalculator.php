@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Modules\Pricing;
+use Illuminate\Support\Arr;
+
 use Carbon\Carbon;
 
 class PriceCalculator

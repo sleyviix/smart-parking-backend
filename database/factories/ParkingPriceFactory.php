@@ -24,8 +24,9 @@ class ParkingPriceFactory extends Factory
             //
             'parking_place_id' => parkingPlace::factory(),
             'size_id' => Size::inRandomOrder()->first()->id,
-            'base' => rand(100,5000),
-            'rates' => null
+            'basePrice' => rand(100,5000),
+            'dailyRate' => null,
+//            'hourlyRate' => null
         ];
     }
 }

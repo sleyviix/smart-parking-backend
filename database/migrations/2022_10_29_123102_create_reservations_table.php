@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->foreignIdFor(\App\Models\parkingSpot::class)->index();
             $table->foreignIdFor(\App\Models\User::class)->index();
             $table->dateTime('start');
             $table->dateTime('end');
             $table->dateTime('paid_at')->nullable();
+            $table->integer('paid_amount')->nullable()->unsigned()->comment('GBP');
             $table->timestamps();
         });
     }

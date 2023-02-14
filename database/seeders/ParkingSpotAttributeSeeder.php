@@ -5,8 +5,11 @@ namespace Database\Seeders;
 use App\Models\parkingPlace;
 use App\Models\parkingSpot;
 use App\Models\parkingSpotAttribute;
+use App\Models\SpotAttribute;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ParkingSpotAttributeSeeder extends Seeder
 {
@@ -15,18 +18,25 @@ class ParkingSpotAttributeSeeder extends Seeder
      *
      * @return void
      */
+
+//    public function run()
+//    {
+//        //
+//        DB::table('spot_attributes')->insert([
+//            ['name' => 'electric'],
+//            ['name' => 'for_women'],
+//            ['name' => 'with_kids'],
+//            ['name' => 'handicapped']
+//        ]);
+//    }
+
     public function run(): void
     {
-        //
-//        \DB::table('parking_spot_attributes')->insert([
-//            ['name' => 'Electric'],
-//            ['name' => 'Disabled'],
-//            ['name' => 'Kids']
-//        ]);
-        parkingPlace::get()->each(function (parkingSpot $parkingSpot){
-            parkingSpotAttribute::get()->each(function (parkingSpotAttribute $parkingSpotAttribute) use ($parkingSpot){
-                $parkingSpot->parkingSpotAttributes()->attach($parkingSpotAttribute->id, [
-                    'hourly_price' => rand(5,10)
+        parkingPlace::get()->each(function (parkingPlace $parkingPlace){
+            SpotAttribute::get()->each(function (SpotAttribute $SpotAttribute) use ($parkingPlace){
+                $parkingPlace->spotAttributes()->attach($SpotAttribute->id, [
+                    'hourly_price' => rand(5,10),
+                    'created_at' => $now = Carbon::now(),
                 ]);
             });
         });

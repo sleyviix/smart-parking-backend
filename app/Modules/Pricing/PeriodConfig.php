@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Modules\Pricing;
+
 use Carbon\Carbon;
 
 class PeriodConfig

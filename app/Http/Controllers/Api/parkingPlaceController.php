@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\parkingPlaceResourceCollection;
+use App\Http\Resources\parkingPlaceShowResource;
 use App\Models\parkingPlace;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -25,6 +26,14 @@ class parkingPlaceController extends Controller
                 }
             ])->get()
         );
+    }
+
+    public function show(parkingPlace $parkingPlace)
+    {
+        $parkingPlace->load('parkingPrices.size', 'spotAttributes');
+
+        return new parkingPlaceShowResource($parkingPlace);
+
     }
 
 }

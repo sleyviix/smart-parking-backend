@@ -3,9 +3,34 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CheckoutRequest;
+use App\Models\Reservation;
+use App\Processors\PriceCalcProcessor;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
     //
+    public function show(CheckoutRequest $request, PriceCalcProcessor $priceCalcProcessor, Reservation $reservation)
+    {
+        $url = $request->user()->checkoutCharge(
+            $priceCalcProcessor->process(
+                $reservation->id),
+            "Reservation #Email:{$request->user()->email} #Name:{$request->user()->name} #Reservation:{$reservation->id} From: ({$reservation->start} To: {$reservation->end})",
+            1,
+            [
+                'success_url' => "http://localhost:3000/checkout/{$reservation->uuid}?response=success",
+                'cancel_url' => "http://localhost:3000",
+                'metadata' => [
+                    'reservationId' => $reservation->id,
+                    'reservationUUID' => $reservation->uuid
+                ]
+            ]
+        )->asStripeCheckoutSession()->url;
+
+        return response()->json(['url' => $url], 200);
+
+
+
+    }
 }

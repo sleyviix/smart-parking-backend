@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Filters\parkingSpot\parkingSpotFilters;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,7 @@ use Illuminate\Support\Arr;
 
 class parkingSpot extends Model
 {
+
     use HasFactory;
 
     protected $guarded = ['id'];
@@ -20,12 +22,12 @@ class parkingSpot extends Model
     /**
      * @return belongsToMany
      */
-    public function parkingSpotAttributes():belongsToMany
+    public function SpotAttributes():belongsToMany
     {
-        return $this->belongsToMany(parkingSpotAttribute::class);
+        return $this->belongsToMany(SpotAttribute::class);
     }
 
-    public function parkingPlaces(): BelongsTo
+    public function parkingPlace(): BelongsTo
     {
         return $this->belongsTo(parkingPlace::class);
     }
@@ -40,15 +42,12 @@ class parkingSpot extends Model
         return $this->belongsTo(Size::class);
     }
 
-    public function scopeFilter(Builder $query, array $filters)
+    public function scopeFilter(Builder $query, array $filters): Builder
     {
-        $query->when(Arr::has($filters, ['start', 'end']), function (Builder $query) use ($filters) {
-            $query->whereDoesntHave('reservations', function (Builder $query) use ($filters) {
-                $query->where([
-                    ['start', '<=', Carbon::parse(Arr::get($filters, 'end'))],
-                    ['end', '>=', Carbon::parse(Arr::get($filters, 'start'))],
-                ]);
-            });
-        });
+        return (new parkingSpotFilters($filters))->filter($query);
+
+//        $query->when(Arr::has($filters, ['start', 'end']), function (Builder $query) use ($filters) {
+//
+//        });
     }
 }

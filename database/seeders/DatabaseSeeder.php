@@ -19,22 +19,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         User::factory(10)->create();
 
-         User::factory()->create([
-             'name' => 'Test User',
-             'email' => Str::random(10).'@gmail.com',
-         ]);
-
+//
+        //Seed Database
          $this->call([
-
+//             SizeSeeder::class,
+//             SpotAttributeSeeder::class,
              ParkingPlaceSeeder::class,
              ParkingPriceSeeder::class,
              ParkingSpotAttributeSeeder::class,
-             ParkingSpotSeeder::class,
-             ReservationSeeder::class,
-             SizeSeeder::class,
-             VehicleSeeder::class,
+             SpotSeeder::class,
+             SpotSpotAttributeSeeder::class,
+//             ReservationSeeder::class,
+//             VehicleSeeder::class,
+
+
+
+
         ]);
 
     }

@@ -28,7 +28,7 @@ class ParkingPlaceSeeder extends Seeder
 //
 //        ]);
 
-        parkingPlace::factory(15)->create();
+        parkingPlace::factory(100)->create();
 
 
     }

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reservation extends Model
 {
+
+
     use HasFactory;
 
     protected $guarded = ['id'];
@@ -31,6 +33,7 @@ class Reservation extends Model
      */
     public function parkingSpot(): BelongsTo
     {
-        return $this->belongsTo(parkingSpot::class, 'spot_id');
+//        return $this->belongsTo(parkingSpot::class, 'spot_id');
+        return $this->belongsTo(parkingSpot::class);
     }
 }

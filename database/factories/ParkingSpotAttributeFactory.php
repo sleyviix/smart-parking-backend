@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\parkingSpotAttribute;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\parkingSpotAttribute>
+ * @extends Factory<parkingSpotAttribute>
  */
 class ParkingSpotAttributeFactory extends Factory
 {

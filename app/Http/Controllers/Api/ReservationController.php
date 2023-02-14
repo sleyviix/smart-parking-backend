@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
+    public function show(Reservation $reservation, Request $request)
+    {
+        return new ReservationResource($reservation);
+
+    }
     //
     public function store(ReservationCreateRequest $reservationCreateRequest)
     {

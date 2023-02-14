@@ -19,7 +19,7 @@ class parkingSpotResource extends JsonResource
             'size_id'=>$this->size->name,
             'floor'=>$this->floor,
             'number'=>(int)$this->number,
-            'attribute'=> $this->parkingSpotAttribute->pluck('name')
+            'attributes'=> $this->spotAttributes->pluck('name')
         ];
     }
 }

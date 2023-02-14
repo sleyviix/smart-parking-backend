@@ -15,28 +15,30 @@ class ParkingPriceSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         //
-        parkingPlace::get()->each(function (parkingSpot $parkingSpot){
+        parkingPlace::get()->each(function (parkingPlace $parkingPlace){
 
            parkingPrice::factory()->create([
-               'parking_place_id' => $parkingSpot->id,
+               'parking_place_id' => $parkingPlace->id,
                'size_id' => 1,
                'basePrice' => 3
            ]);
 
            parkingPrice::factory()->create([
-              'parking_place_id' => $parkingSpot->id,
+              'parking_place_id' => $parkingPlace->id,
                'size_id' => 2,
                'basePrice' => 3,
-               'rates' => [
-                   ['amount' => 20, 'hours' => implode('-', [$start = rand(0,20), rand($start, 23)]), 'days' => array_unique(range(1, rand(1,7)))]
-               ]
+               'dailyRate' => 5
+
+//                   [
+//                   ['amount' => 20, 'hours' => implode('-', [$start = rand(0,20), rand($start, 23)]), 'days' => array_unique(range(1, rand(1,7)))]
+//               ]
            ]);
 
            parkingPrice::factory()->create([
-              'parking_place_id' => $parkingSpot->id,
+              'parking_place_id' => $parkingPlace->id,
               'size_id' => 3,
                'basePrice' => 2
            ]);

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('parking_spots', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\parkingSpot::class)->index();
+            $table->foreignIdFor(\App\Models\parkingPlace::class)->index();
             $table->foreignIdFor(\App\Models\Size::class)->index();
             $table->integer('floor')->default(0)->nullable();
             $table->integer('number')->default(0)->nullable();

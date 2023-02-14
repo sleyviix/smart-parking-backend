@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Size::class);
             $table->integer('basePrice')->unsigned()->comment('GBP');
             $table->json('dailyRate')->nullable();
-            $table->json('hourlyRate')->nullable();
+//            $table->json('hourlyRate')->nullable();
             $table->timestamps();
         });
     }

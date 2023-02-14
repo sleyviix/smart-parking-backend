@@ -13,7 +13,9 @@ class CheckoutRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+//        return $this->user()->can('pay', $this->route()->reservation);
+//        dd($this->user()->can('pay', $this->route()->reservation));
+        return true;
     }
 
     /**

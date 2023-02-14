@@ -30,7 +30,7 @@ class ReservationPolicy
      * @param  \App\Models\Reservation  $reservation
      * @return Response|bool
      */
-    public function view(User $user, Reservation $reservation):Boolean
+    public function view(User $user, Reservation $reservation):bool
     {
         //
         return (int)$user->id == (int)$reservation->user_id;
@@ -67,10 +67,10 @@ class ReservationPolicy
      * @param  \App\Models\Reservation  $reservation
      * @return Response|bool
      */
-//    public function delete(User $user, Reservation $reservation)
-//    {
-//        //
-//    }
+    public function delete(User $user, Reservation $reservation)
+    {
+        //
+    }
 
     /**
      * Determine whether the user can restore the model.
@@ -95,4 +95,10 @@ class ReservationPolicy
 //    {
 //        //
 //    }
+
+
+    public function pay(User $user, Reservation $reservation)
+    {
+     return (int)$user->id == (int)$reservation->user_id && empty($reservation->paid_at);
+    }
 }

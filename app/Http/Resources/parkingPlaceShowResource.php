@@ -18,8 +18,15 @@ class parkingPlaceShowResource extends JsonResource
             'id' => $this->id,
             'name'=> $this->name,
             'postcode'=> $this->postCode,
-//            'attributes' => $this->parkingSpotAttribute->pluck('pivot.hourly_price'),
-            'attributes' => $this->parkingSpotAttribute,
+            'sizes'      => $this->parkingPrices->transform(function ($entry) {
+                return
+                    [
+                            'name' => $entry->size->name,
+                            'price' => $entry->basePrice,
+                            'rates' => $entry->dailyRate
+                    ];
+            }),
+            'attributes' => $this->spotAttributes->pluck('pivot.hourly_price', 'name'),
         ];
     }
 }

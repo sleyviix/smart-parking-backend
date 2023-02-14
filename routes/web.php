@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,8 @@ Route::get('/', function () {
 Route::get('me', function () {
     return new \App\Http\Resources\parkingPlaceResourceCollection(\App\Models\parkingPlace::get());
 });
+
+Route::post(
+    '/stripe/webhook',
+    [WebhookController::class, 'handleWebhook']
+)->name('cashier.webhook');

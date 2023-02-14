@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class parkingPlace extends Model
 {
+
     use HasFactory;
 
     protected $guarded = ['id'];
@@ -28,7 +29,7 @@ class parkingPlace extends Model
      */
     public function parkingSpots(): HasMany
     {
-        return $this->hasMany(parkingSpot::class,'parking_spot_id');
+        return $this->hasMany(parkingSpot::class);
     }
 
     /**
@@ -36,6 +37,6 @@ class parkingPlace extends Model
      */
     public function spotAttributes(): belongsToMany
     {
-        return $this->belongsToMany(parkingSpotAttribute::class)->withPivot('hourly_price');
+        return $this->belongsToMany(SpotAttribute::class)->withPivot('hourly_price');
     }
 }

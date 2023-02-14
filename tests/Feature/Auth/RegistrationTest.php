@@ -29,7 +29,7 @@ class RegistrationTest extends TestCase
         $response = $this->postJson('/api/auth/register', data: [
             'email' => $email = $this->faker->safeEmail(),
             'name'=> $this->faker->name(),
-            'password'=> $password = 'Gulabzari2020@',
+            'password'=> $password = 'AdamPhylum2020@',
             'password_confirmation' => $password
 
         ])->assertStatus(status: 201)
@@ -53,7 +53,7 @@ class RegistrationTest extends TestCase
     public function test_if_database_allows_duplicated_emails(): void
     {
 
-        $email = 'sulemancontact@yahoo.com';
+        $email = 'adamphylum@yahoo.com';
 
         User::factory()->create([
             'email' => $email,
@@ -62,7 +62,7 @@ class RegistrationTest extends TestCase
         $response = $this->postJson('/api/auth/register', data: [
             'email' => $email,
             'name'=> $this->faker->name(),
-            'password'=> $password = 'Gulabzari2020@',
+            'password'=> $password = 'Password2020@',
             'password_confirmation' => $password
 
         ])->assertJsonFragment(['email'=> ['The email has already been taken.']]);

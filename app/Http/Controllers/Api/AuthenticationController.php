@@ -34,7 +34,7 @@ class AuthenticationController extends Controller
 
     //https://laravel.com/docs/8.x/authentication
 
-    public function loginToken(LoginRequest $request)
+    public function loginToken(LoginRequest $request): JsonResponse
     {
         //
         if(!Auth::attempt($request->all())){
@@ -46,6 +46,7 @@ class AuthenticationController extends Controller
         $user = User::where('email', $request->get('email'))->firstOrFail();
 
         $LoginToken = $user -> createToken('authentication_token')->plainTextToken;
+
 
         return response()->json([
             'access_token' => $LoginToken,

@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('reservations', function (Blueprint $table) {
-            //
+        Schema::table('reservations', function ($table) {
+            $table->integer('paid_amount')->nullable()->unsigned()->comment('GBP');
         });
     }
 

@@ -29,7 +29,7 @@ class ExistingReservationRule implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value):Boolean
+    public function passes($attribute, $value)
     {
         if (!$this->parking_spot_id) {
             return false;
