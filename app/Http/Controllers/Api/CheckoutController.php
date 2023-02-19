@@ -10,12 +10,13 @@ use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
-    //
+
     public function show(CheckoutRequest $request, PriceCalcProcessor $priceCalcProcessor, Reservation $reservation)
     {
+        $price = $priceCalcProcessor->process($reservation->id) * 100;
+
         $url = $request->user()->checkoutCharge(
-            $priceCalcProcessor->process(
-                $reservation->id),
+            $price,
             "Reservation #Email:{$request->user()->email} #Name:{$request->user()->name} #Reservation:{$reservation->id} From: ({$reservation->start} To: {$reservation->end})",
             1,
             [
@@ -29,8 +30,5 @@ class CheckoutController extends Controller
         )->asStripeCheckoutSession()->url;
 
         return response()->json(['url' => $url], 200);
-
-
-
     }
 }

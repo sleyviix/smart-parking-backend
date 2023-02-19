@@ -13,7 +13,12 @@ class ReservationDestroyRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('delete', $this->route()->reservation);
+        $user = $this->User();
+        $reservation = $this->route('reservation');
+
+        dd($user, $reservation, $user->can('delete', $reservation));
+
+        return $user->can('delete', $reservation);
     }
 
     /**

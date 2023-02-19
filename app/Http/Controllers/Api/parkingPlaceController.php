@@ -36,4 +36,57 @@ class parkingPlaceController extends Controller
 
     }
 
+//    public function store(Request $request)
+//    {
+//        $validatedData = $request->validate([
+//            'name' => 'required|string|max:255',
+//            'postCode' => 'required|string|max:10',
+//            'lng' => 'required|numeric',
+//            'lat' => 'required|numeric',
+//            'parkingPrices' => 'required|array',
+//            'parkingPrices.*.size_id' => 'required|exists:sizes,id',
+//            'parkingPrices.*.basePrice' => 'required|numeric',
+//            'parkingPrices.*.dailyRate' => 'required|numeric',
+//            'spotAttributes' => 'nullable|array',
+//            'spotAttributes.*.attribute_id' => 'required|exists:attributes,id',
+//            'spotAttributes.*.hourly_price' => 'required|numeric',
+//            'parkingSpots' => 'required|array',
+//            'parkingSpots.*.size_id' => 'required|exists:sizes,id',
+//            'parkingSpots.*.floor' => 'required|numeric',
+//            'parkingSpots.*.number' => 'required|numeric',
+//        ]);
+//
+//        $parkingPlace = new parkingPlace($validatedData);
+//        $parkingPlace->save();
+//
+//        $parkingPlace->parkingPrices()->createMany($validatedData['parkingPrices']);
+//        if (isset($validatedData['spotAttributes'])) {
+//            $parkingPlace->spotAttributes()->sync($validatedData['spotAttributes']);
+//        }
+//
+//        $parkingSpots = collect($validatedData['parkingSpots'])
+//            ->map(function ($spot) {
+//                return new ParkingSpot($spot);
+//            });
+//
+//        $parkingPlace->parkingSpots()->saveMany($parkingSpots);
+//
+//        return new parkingPlaceShowResource($parkingPlace);
+//    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'postCode' => 'required|string|max:10',
+            'lng' => 'required|numeric',
+            'lat' => 'required|numeric',
+        ]);
+
+        $parkingPlace = parkingPlace::create($validatedData);
+
+        return new parkingPlaceShowResource($parkingPlace);
+    }
+
+
 }

@@ -12,6 +12,13 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
+    public function index(Request $request)
+    {
+        $reservations = $request->User()->reservations;
+
+        return ReservationResource::collection($reservations);
+    }
+
     public function show(Reservation $reservation, Request $request)
     {
         return new ReservationResource($reservation);
@@ -34,14 +41,13 @@ class ReservationController extends Controller
 
     }
 
-    public function delete(ReservationDestroyRequest $reservationDestroyRequest, Reservation $reservation)
+    public function delete(Reservation $reservation)
     {
 
         $reservation->delete();
 
         return response()->json('ok', 204);
 
-//        $reservationDestroyRequest->user()->can('delete', $reservation);
     }
 
 

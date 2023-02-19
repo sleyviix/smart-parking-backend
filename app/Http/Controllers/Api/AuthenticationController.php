@@ -50,8 +50,9 @@ class AuthenticationController extends Controller
 
         return response()->json([
             'access_token' => $LoginToken,
-            'token_type' => 'Bearer'
-        ]);
+            'token_type' => 'Bearer',
+            'is_admin' => $user->is_admin
+        ], status: 201);
     }
 
 }

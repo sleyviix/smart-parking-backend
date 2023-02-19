@@ -30,24 +30,33 @@ Route::post('/auth/register', [AuthenticationController::class, 'register']);
 
 Route::post('/auth/loginToken', [AuthenticationController::class, 'loginToken']);
 
+Route::post('/login', [AuthenticationController::class, 'loginToken'])->name('login');
 
+Route::middleware(['auth:sanctum', 'admin'])->group(function(){
+    Route::post('parkingPlace/create', [parkingPlaceController::class, 'store']);
+});
 
 Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::get('Users', [UserController::class, 'User']);
     Route::post('reservations', [ReservationController::class, 'store']);
+    Route::get('reservations', [ReservationController::class, 'index']);
     Route::get('reservations/{reservation:uuid}', [ReservationController::class, 'show']);
     Route::patch('reservations/{reservation}', [ReservationController::class, 'update']);
     Route::delete('reservations/{reservation}', [ReservationController::class, 'delete']);
     Route::post('/calculate-payment',PayController::class);
     Route::get('checkout/{reservation}',[CheckoutController::class, 'show']);
+    Route::get('/user', [UserController::class, 'showUser']);
+    Route::match(['put', 'patch'], '/user', [UserController::class, 'updateUser']);
 });
 
 
 
 Route::middleware(['internal'])->group(function(){
 
+    Route::get('reservations/show', [ReservationController::class, 'show']);
     Route::get('parkingPlace', [parkingPlaceController::class, 'index']);
+//    Route::post('parkingPlace/create', [parkingPlaceController::class, 'store']);
     Route::get('parkingPlace/{parkingPlace}', [parkingPlaceController::class, 'show']);
     Route::get('parkingPlace/{parkingPlace}/spots', [parkingSpotController::class, 'index']);
     Route::get('parkingPlace/{parkingPlace}/parkingSpots',[parkingSpotController::class, 'show']);
