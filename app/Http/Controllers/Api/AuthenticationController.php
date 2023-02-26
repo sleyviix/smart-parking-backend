@@ -55,4 +55,21 @@ class AuthenticationController extends Controller
         ], status: 201);
     }
 
+    public function adminLogin(LoginRequest $request) {
+        $credentials = $request->only('email', 'password');
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
+            return response()->json(['error' => 'Invalid login details'], 401);
+        }
+
+        if ($user->is_admin !== 1) {
+            return response()->json(['error' => 'You are not authorized to login'], 401);
+        }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+        return response()->json(['token' => $token], 200);
+    }
+
+
 }

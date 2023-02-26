@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\parkingPlaceResourceCollection;
 use App\Http\Resources\parkingPlaceShowResource;
 use App\Models\parkingPlace;
+use App\Models\parkingPrice;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -36,6 +37,7 @@ class parkingPlaceController extends Controller
 
     }
 
+
 //    public function store(Request $request)
 //    {
 //        $validatedData = $request->validate([
@@ -43,33 +45,9 @@ class parkingPlaceController extends Controller
 //            'postCode' => 'required|string|max:10',
 //            'lng' => 'required|numeric',
 //            'lat' => 'required|numeric',
-//            'parkingPrices' => 'required|array',
-//            'parkingPrices.*.size_id' => 'required|exists:sizes,id',
-//            'parkingPrices.*.basePrice' => 'required|numeric',
-//            'parkingPrices.*.dailyRate' => 'required|numeric',
-//            'spotAttributes' => 'nullable|array',
-//            'spotAttributes.*.attribute_id' => 'required|exists:attributes,id',
-//            'spotAttributes.*.hourly_price' => 'required|numeric',
-//            'parkingSpots' => 'required|array',
-//            'parkingSpots.*.size_id' => 'required|exists:sizes,id',
-//            'parkingSpots.*.floor' => 'required|numeric',
-//            'parkingSpots.*.number' => 'required|numeric',
 //        ]);
 //
-//        $parkingPlace = new parkingPlace($validatedData);
-//        $parkingPlace->save();
-//
-//        $parkingPlace->parkingPrices()->createMany($validatedData['parkingPrices']);
-//        if (isset($validatedData['spotAttributes'])) {
-//            $parkingPlace->spotAttributes()->sync($validatedData['spotAttributes']);
-//        }
-//
-//        $parkingSpots = collect($validatedData['parkingSpots'])
-//            ->map(function ($spot) {
-//                return new ParkingSpot($spot);
-//            });
-//
-//        $parkingPlace->parkingSpots()->saveMany($parkingSpots);
+//        $parkingPlace = parkingPlace::create($validatedData);
 //
 //        return new parkingPlaceShowResource($parkingPlace);
 //    }
@@ -81,11 +59,36 @@ class parkingPlaceController extends Controller
             'postCode' => 'required|string|max:10',
             'lng' => 'required|numeric',
             'lat' => 'required|numeric',
+            'size_id_1_baseRate' => 'required|numeric',
+            'size_id_2_baseRate' => 'required|numeric',
+            'size_id_3_baseRate' => 'required|numeric',
         ]);
 
-        $parkingPlace = parkingPlace::create($validatedData);
+        // Create a new parking place record
+        $parkingPlace = ParkingPlace::create($validatedData);
 
-        return new parkingPlaceShowResource($parkingPlace);
+        // Create a new parking price record for each size
+        $size1Price = new ParkingPrice([
+            'size_id' => 1,
+            'basePrice' => $validatedData['size_id_1_baseRate'],
+        ]);
+        $size2Price = new ParkingPrice([
+            'size_id' => 2,
+            'basePrice' => $validatedData['size_id_2_baseRate'],
+        ]);
+        $size3Price = new ParkingPrice([
+            'size_id' => 3,
+            'basePrice' => $validatedData['size_id_3_baseRate'],
+        ]);
+        $parkingPlace->parkingPrices()->saveMany([
+            $size1Price->setAttribute('parking_place_id', $parkingPlace->id),
+            $size2Price->setAttribute('parking_place_id', $parkingPlace->id),
+            $size3Price->setAttribute('parking_place_id', $parkingPlace->id),
+        ]);
+
+        return response()->json([
+            'message' => 'Parking place Added successfully'
+        ], 200);
     }
 
 
