@@ -13,7 +13,7 @@ use App\Http\Controllers\Api\PayController;
 use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Admin;
+//use App\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,20 +39,37 @@ Route::post('/login', [AuthenticationController::class, 'loginToken'])->name('lo
 //    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 //
 //});
-Route::post('parkingPlace/create', [parkingPlaceController::class, 'store']);
-Route::patch('/dashboard/parkingPlaces/update/{id}', [DashboardController::class, 'updateParkingPlace']);
-Route::get('dashbaord/users', [DashboardController::class, 'users']);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-Route::get('/dashboard/users', [DashboardController::class, 'getAllUsers'])->name('dashboard.users');
-Route::get('/parkingPlaces', [DashboardController::class, 'showParkingPlaces'])->name('dashboard.show-parking-places');
-Route::patch('/dashboard/users/{id}', [DashboardController::class, 'updateUser']);
-Route::delete('/dashboard/users/delete/{user}', [DashboardController::class, 'deleteUser']);
-Route::get('/dashboard/parkingplaces/all', [DashboardController::class, 'getAllParkingPlaces']);
-Route::post('/dashboard/parkingspots/add', [DashboardController::class, 'addParkingSpot']);
-Route::get('/dashboard/parkingPlaces/parkingSpots/show/{id}', [DashboardController::class, 'getSpotsByParkingPlace']);
-Route::delete('/dashboard/parkingPlaces/parkingSpots/delete/{id}', [DashboardController::class, 'deleteParkingSpot']);
-Route::get('/dashboard/reservations/all', [DashboardController::class, 'viewAllReservations']);
-Route::delete('/dashboard/reservation/delete/{id}', [DashboardController::class, 'deleteReservation']);
+
+Route::middleware(['auth:sanctum', 'admin'])->group(function(){
+    Route::post('parkingPlace/create', [parkingPlaceController::class, 'store']);
+    Route::patch('/dashboard/parkingPlaces/update/{id}', [DashboardController::class, 'updateParkingPlace']);
+    Route::get('dashbaord/users', [DashboardController::class, 'users']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard/users', [DashboardController::class, 'getAllUsers'])->name('dashboard.users');
+    Route::get('/parkingPlaces', [DashboardController::class, 'showParkingPlaces'])->name('dashboard.show-parking-places');
+    Route::patch('/dashboard/users/{id}', [DashboardController::class, 'updateUser']);
+    Route::delete('/dashboard/users/delete/{user}', [DashboardController::class, 'deleteUser']);
+    Route::get('/dashboard/parkingplaces/all', [DashboardController::class, 'getAllParkingPlaces']);
+    Route::post('/dashboard/parkingspots/add', [DashboardController::class, 'addParkingSpot']);
+    Route::get('/dashboard/parkingPlaces/parkingSpots/show/{id}', [DashboardController::class, 'getSpotsByParkingPlace']);
+    Route::delete('/dashboard/parkingPlaces/parkingSpots/delete/{id}', [DashboardController::class, 'deleteParkingSpot']);
+    Route::get('/dashboard/reservations/all', [DashboardController::class, 'viewAllReservations']);
+    Route::delete('/dashboard/reservation/delete/{id}', [DashboardController::class, 'deleteReservation']);
+});
+//Route::post('parkingPlace/create', [parkingPlaceController::class, 'store']);
+//Route::patch('/dashboard/parkingPlaces/update/{id}', [DashboardController::class, 'updateParkingPlace']);
+//Route::get('dashbaord/users', [DashboardController::class, 'users']);
+//Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+//Route::get('/dashboard/users', [DashboardController::class, 'getAllUsers'])->name('dashboard.users');
+//Route::get('/parkingPlaces', [DashboardController::class, 'showParkingPlaces'])->name('dashboard.show-parking-places');
+//Route::patch('/dashboard/users/{id}', [DashboardController::class, 'updateUser']);
+//Route::delete('/dashboard/users/delete/{user}', [DashboardController::class, 'deleteUser']);
+//Route::get('/dashboard/parkingplaces/all', [DashboardController::class, 'getAllParkingPlaces']);
+//Route::post('/dashboard/parkingspots/add', [DashboardController::class, 'addParkingSpot']);
+//Route::get('/dashboard/parkingPlaces/parkingSpots/show/{id}', [DashboardController::class, 'getSpotsByParkingPlace']);
+//Route::delete('/dashboard/parkingPlaces/parkingSpots/delete/{id}', [DashboardController::class, 'deleteParkingSpot']);
+//Route::get('/dashboard/reservations/all', [DashboardController::class, 'viewAllReservations']);
+//Route::delete('/dashboard/reservation/delete/{id}', [DashboardController::class, 'deleteReservation']);
 
 
 Route::middleware(['auth:sanctum'])->group(function(){
@@ -67,6 +84,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('checkout/{reservation}',[CheckoutController::class, 'show']);
     Route::get('/user', [UserController::class, 'showUser']);
     Route::match(['put', 'patch'], '/user', [UserController::class, 'updateUser']);
+    Route::get('/users/{userId}/paid_amount', [UserController::class, 'sumPaidAmount']);
+    Route::get('/users/{userId}/reservations/count', [UserController::class, 'countReservations']);
 });
 
 
@@ -79,6 +98,7 @@ Route::middleware(['internal'])->group(function(){
     Route::get('parkingPlace/{parkingPlace}', [parkingPlaceController::class, 'show']);
     Route::get('parkingPlace/{parkingPlace}/spots', [parkingSpotController::class, 'index']);
     Route::get('parkingPlace/{parkingPlace}/parkingSpots',[parkingSpotController::class, 'show']);
+    Route::get('/parking-places/{parkingPlaceId}/prices/sum', [ParkingPlaceController::class, 'sumPrices']);
 });
 
 
