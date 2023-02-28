@@ -15,5 +15,6 @@ class parkingPlaceResourceCollection extends ResourceCollection
     public function toArray($request)
     {
         return parent::toArray($request);
+
     }
 }

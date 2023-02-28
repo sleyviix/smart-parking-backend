@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -39,5 +40,24 @@ class UserController extends Controller
             'message' => 'User updated successfully',
             'user' => new UserResource($user),
         ]);
+    }
+
+    public function sumPaidAmount($userId)
+    {
+        $sum = DB::table('reservations')
+            ->where('user_id', $userId)
+            ->whereNotNull('paid_amount')
+            ->sum('paid_amount');
+
+        return $sum;
+    }
+
+    public function countReservations($userId)
+    {
+        $count = DB::table('reservations')
+            ->where('user_id', $userId)
+            ->count();
+
+        return $count;
     }
 }

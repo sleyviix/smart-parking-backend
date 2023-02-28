@@ -46,7 +46,7 @@ class ReservationController extends Controller
 
         $reservation->delete();
 
-        return response()->json('ok', 204);
+        return response()->json('ok', 200);
 
     }
 

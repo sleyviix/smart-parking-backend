@@ -10,11 +10,12 @@ use App\Models\parkingPlace;
 use App\Models\parkingPrice;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 
 class parkingPlaceController extends Controller
 {
-    //
+
     public function index(Request $request)
     {
         return new parkingPlaceResourceCollection(
@@ -89,6 +90,16 @@ class parkingPlaceController extends Controller
         return response()->json([
             'message' => 'Parking place Added successfully'
         ], 200);
+    }
+
+    public function sumPrices($parkingPlaceId)
+    {
+        $sum = DB::table('parking_prices')
+            ->where('parking_place_id', $parkingPlaceId)
+            ->whereNotNull('basePrice')
+            ->sum('basePrice');
+
+        return $sum;
     }
 
 
