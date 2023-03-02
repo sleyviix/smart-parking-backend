@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\parkingPlaceController;
 use App\Http\Controllers\Api\parkingSpotController;
+use App\Http\Controllers\Api\PasswordResetController;
 use App\Http\Controllers\Api\PayController;
 use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\UserController;
@@ -33,6 +34,9 @@ Route::post('/auth/loginToken', [AuthenticationController::class, 'loginToken'])
 
 Route::post('/login', [AuthenticationController::class, 'loginToken'])->name('login');
 
+Route::post('password/email', [PasswordResetController::class, 'sendResetLinkEmail']);
+
+Route::post('password/reset', [PasswordResetController::class, 'reset']);
 //Route::middleware(['auth:sanctum', 'admin'])->group(function(){
 //    Route::post('parkingPlace/create', [parkingPlaceController::class, 'store']);
 //    Route::get('dashbaord/users', [DashboardController::class, 'users']);
