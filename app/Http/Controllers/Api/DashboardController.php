@@ -23,7 +23,7 @@ class DashboardController extends Controller
     {
         $userCount = User::count();
         $reservationCount = Reservation::count();
-        $totalPaidAmount = $this->getTotalPaidAmount();
+        $totalPaidAmount = $this->getTotalPaidAmount() / 100;
 
         return response()->json([
             'userCount' => $userCount,
