@@ -20,8 +20,8 @@ class CheckoutController extends Controller
             "Reservation #Email:{$request->user()->email} #Name:{$request->user()->name} #Reservation:{$reservation->id} From: ({$reservation->start} To: {$reservation->end})",
             1,
             [
-                'success_url' => "http://localhost:3000/checkout/{$reservation->uuid}?response=success",
-                'cancel_url' => "http://localhost:3000",
+                'success_url' => "https://smart-parking-frontend-git-master-sleyviix.vercel.app/checkout/{$reservation->uuid}?response=success",
+                'cancel_url' => "https://smart-parking-frontend-git-master-sleyviix.vercel.app",
                 'metadata' => [
                     'reservationId' => $reservation->id,
                     'reservationUUID' => $reservation->uuid
