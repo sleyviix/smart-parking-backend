@@ -49,7 +49,7 @@ class UserController extends Controller
             ->whereNotNull('paid_amount')
             ->sum('paid_amount');
 
-        return $sum;
+        return $sum / 100;
     }
 
     public function countReservations($userId)
