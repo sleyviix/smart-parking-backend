@@ -8,7 +8,7 @@ use App\Http\Resources\parkingSpotResource;
 use App\Http\Resources\ReservationResource;
 use App\Http\Resources\UserResource;
 use App\Models\parkingPlace;
-use App\Models\ParkingSpot;
+use App\Models\parkingSpot;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -236,7 +236,7 @@ class DashboardController extends Controller
         ]);
 
         // Create a new parking spot
-        $parkingSpot = new ParkingSpot();
+        $parkingSpot = new parkingSpot();
         $parkingSpot->parking_place_id = $validatedData['parking_place_id'];
         $parkingSpot->size_id = $validatedData['size_id'];
         $parkingSpot->floor = $validatedData['floor'];
