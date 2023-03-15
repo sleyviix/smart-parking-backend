@@ -29,15 +29,13 @@ class RegistrationTest extends TestCase
         $response = $this->postJson('/api/auth/register', data: [
             'email' => $email = $this->faker->safeEmail(),
             'name'=> $this->faker->name(),
-            'password'=> $password = 'AdamPhylum2020@',
+            'password'=> $password = 'TestPassword12345@',
             'password_confirmation' => $password
 
         ])->assertStatus(status: 201)
             ->assertJsonStructure([
                 'access_token', 'token_type'
                 ]);
-        //$this->assertTrue(true);
-        //dd($response);
 
         $this->assertDatabaseHas(table: 'users', data: ['email'=>$email]);
 

@@ -21,7 +21,7 @@ class ReservationResource extends JsonResource
             'start'      => $this->start,
             'end'        => $this->end,
             'paid_at'    => $this->paid_at,
-            'paid_amount'    => $this->paid_amount,
+            'paid_amount'    => $this->paid_amount /100,
             'created_at' => $this->created_at,
             'parking_place_name' => $this->parkingSpot->parkingPlace->name,
             'parking_place_postcode' => $this->parkingSpot->parkingPlace->postCode,
