@@ -59,7 +59,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function(){
     Route::delete('/dashboard/parkingPlaces/parkingSpots/delete/{id}', [DashboardController::class, 'deleteParkingSpot']);
     Route::get('/dashboard/reservations/all', [DashboardController::class, 'viewAllReservations']);
     Route::delete('/dashboard/reservation/delete/{id}', [DashboardController::class, 'deleteReservation']);
-    Route::delete('/dashboard/parkingPlace/delete/{user}', [parkingPlaceController::class, 'deleteParkingPlace']);
+    Route::delete('/parkingPlace/delete/{user}', [parkingPlaceController::class, 'deleteParkingPlace']);
 });
 //Route::post('parkingPlace/create', [parkingPlaceController::class, 'store']);
 //Route::patch('/dashboard/parkingPlaces/update/{id}', [DashboardController::class, 'updateParkingPlace']);
