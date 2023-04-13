@@ -25,8 +25,8 @@ class ParkingSpotFactory extends Factory
             //
             'parking_place_id' => parkingPlace::factory(),
             'size_id' => Size::inRandomOrder()->first()->id,
-            'floor' => rand(0, 15),
-            'number' => rand(0, 15),
+            'floor' => rand(0, 5),
+            'number' => rand(0, 20),
 
 
 

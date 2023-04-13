@@ -39,20 +39,6 @@ class parkingPlaceController extends Controller
     }
 
 
-//    public function store(Request $request)
-//    {
-//        $validatedData = $request->validate([
-//            'name' => 'required|string|max:255',
-//            'postCode' => 'required|string|max:10',
-//            'lng' => 'required|numeric',
-//            'lat' => 'required|numeric',
-//        ]);
-//
-//        $parkingPlace = parkingPlace::create($validatedData);
-//
-//        return new parkingPlaceShowResource($parkingPlace);
-//    }
-
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -100,6 +86,17 @@ class parkingPlaceController extends Controller
             ->sum('basePrice');
 
         return $sum;
+    }
+
+    public function deleteParkingPlace(parkingPlace $parkingPlace)
+    {
+        // Delete the user from the database
+        $parkingPlace->delete();
+
+        // Return a JSON response showing success
+        return response()->json([
+            'message' => 'Parking Place deleted successfully',
+        ], 200);
     }
 
 

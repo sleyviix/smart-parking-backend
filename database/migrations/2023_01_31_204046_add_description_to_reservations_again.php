@@ -11,22 +11,22 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::table('reservations_again', function (Blueprint $table) {
-            //
-        });
-    }
+//    public function up()
+//    {
+//        Schema::table('reservations_again', function (Blueprint $table) {
+//            //
+//        });
+//    }
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::table('reservations_again', function (Blueprint $table) {
-            //
-        });
-    }
+//    public function down()
+//    {
+//        Schema::table('reservations_again', function (Blueprint $table) {
+//            //
+//        });
+//    }
 };

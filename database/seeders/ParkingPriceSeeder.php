@@ -23,14 +23,15 @@ class ParkingPriceSeeder extends Seeder
            parkingPrice::factory()->create([
                'parking_place_id' => $parkingPlace->id,
                'size_id' => 1,
-               'basePrice' => 3
+               'basePrice' => rand(1,3),
+               'dailyRate' => 5
            ]);
 
            parkingPrice::factory()->create([
               'parking_place_id' => $parkingPlace->id,
                'size_id' => 2,
-               'basePrice' => 3,
-               'dailyRate' => 5
+               'basePrice' => rand(4,6),
+               'dailyRate' => 10
 
 //                   [
 //                   ['amount' => 20, 'hours' => implode('-', [$start = rand(0,20), rand($start, 23)]), 'days' => array_unique(range(1, rand(1,7)))]
@@ -40,7 +41,8 @@ class ParkingPriceSeeder extends Seeder
            parkingPrice::factory()->create([
               'parking_place_id' => $parkingPlace->id,
               'size_id' => 3,
-               'basePrice' => 2
+               'basePrice' => rand(7,9),
+               'dailyRate' => 15
            ]);
 
         });

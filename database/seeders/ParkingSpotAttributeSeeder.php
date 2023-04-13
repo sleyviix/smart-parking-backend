@@ -35,7 +35,7 @@ class ParkingSpotAttributeSeeder extends Seeder
         parkingPlace::get()->each(function (parkingPlace $parkingPlace){
             SpotAttribute::get()->each(function (SpotAttribute $SpotAttribute) use ($parkingPlace){
                 $parkingPlace->spotAttributes()->attach($SpotAttribute->id, [
-                    'hourly_price' => rand(5,10),
+                    'hourly_price' => rand(1,10),
                     'created_at' => $now = Carbon::now(),
                 ]);
             });

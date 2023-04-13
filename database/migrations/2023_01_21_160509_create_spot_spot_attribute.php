@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('spot_spot_attribute', function (Blueprint $table) {
+        Schema::create('parking_spot_spot_attribute', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\parkingSpot::class);
             $table->foreignIdFor(\App\Models\SpotAttribute::class);
@@ -29,6 +29,6 @@ return new class extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('spot_spot_attribute');
+        Schema::dropIfExists('parking_spot_spot_attribute');
     }
 };

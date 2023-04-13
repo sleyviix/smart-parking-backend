@@ -21,10 +21,8 @@ class ParkingPlaceFactory extends Factory
         $birminghamLat = 52.486243;
 
         return [
-            'name' => $this->faker->name,
-            'postCode' => $this->faker->postcode,
-//            'lng' => $this->faker->longitude,
-//            'lat' => $this->faker->latitude,
+            'name' => $this->faker->streetName . ' Car Park',
+            'postCode' => 'B' . $this->faker->regexify('[0-9]{2}') . ' ' . $this->faker->regexify('[0-9]') . $this->faker->regexify('[A-Z]{2}'),
             'lng' => $this->faker->randomFloat($nbMaxDecimals = 6, $min = $birminghamLng - 0.2, $max = $birminghamLng + 0.2),
             'lat' => $this->faker->randomFloat($nbMaxDecimals = 6, $min = $birminghamLat - 0.2, $max = $birminghamLat + 0.2),
         ];

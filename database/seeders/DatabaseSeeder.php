@@ -23,15 +23,15 @@ class DatabaseSeeder extends Seeder
 //
         //Seed Database
          $this->call([
-//             SizeSeeder::class,
-//             SpotAttributeSeeder::class,
+             SizeSeeder::class,
+             SpotAttributeSeeder::class,
              ParkingPlaceSeeder::class,
              ParkingPriceSeeder::class,
              ParkingSpotAttributeSeeder::class,
              SpotSeeder::class,
              SpotSpotAttributeSeeder::class,
 //             ReservationSeeder::class,
-//             VehicleSeeder::class,
+             VehicleSeeder::class,
 
 
 

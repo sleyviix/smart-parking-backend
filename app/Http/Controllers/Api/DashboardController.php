@@ -167,61 +167,6 @@ class DashboardController extends Controller
         ], 200);
     }
 
-//    public function addParkingSpot(Request $request)
-//    {
-//        // Validate the request data
-//        $validatedData = $request->validate([
-//            'parking_place_id' => 'required|exists:parking_places,id',
-//            'size_id' => 'required|exists:sizes,id',
-//            'floor' => 'required|numeric',
-//            'number' => 'required|numeric'
-//        ]);
-//
-//        // Create a new parking spot
-//        $parkingSpot = new ParkingSpot();
-//        $parkingSpot->parking_place_id = $validatedData['parking_place_id'];
-//        $parkingSpot->size_id = $validatedData['size_id'];
-//        $parkingSpot->floor = $validatedData['floor'];
-//        $parkingSpot->number = $validatedData['number'];
-//        $parkingSpot->save();
-//
-//        return "Parking spot added successfully";
-//    }
-
-//    public function addParkingSpot(Request $request)
-//    {
-//        // Validate the request data
-//        $validatedData = $request->validate([
-//            'parking_place_id' => 'required|exists:parking_places,id',
-//            'size_id' => 'required|exists:sizes,id',
-//            'floor' => 'required|numeric',
-//            'number' => 'required|numeric',
-//            'attributes' => 'required|numeric',
-//            'attributes.*' => 'required|exists:spot_attributes,id'
-//        ]);
-//
-//        // Create a new parking spot
-//        $parkingSpot = new ParkingSpot();
-//        $parkingSpot->parking_place_id = $validatedData['parking_place_id'];
-//        $parkingSpot->size_id = $validatedData['size_id'];
-//        $parkingSpot->floor = $validatedData['floor'];
-//        $parkingSpot->number = $validatedData['number'];
-//        $parkingSpot->save();
-//
-//        // Add spot attributes
-//        if (isset($validatedData['attributes'])) {
-//            $spotAttributes = array_map(function ($attributeId) use ($parkingSpot) {
-//                return [
-//                    'parking_spot_id' => $parkingSpot->id,
-//                    'spot_attribute_id' => $attributeId
-//                ];
-//            }, $validatedData['attributes']);
-//
-//            DB::table('parking_spot_spot_attribute')->insert($spotAttributes);
-//        }
-//
-//        return "Parking spot added successfully";
-//    }
 
     public function addParkingSpot(Request $request)
     {
@@ -259,53 +204,6 @@ class DashboardController extends Controller
         return "Parking spot added successfully";
     }
 
-//    public function getSpotsByParkingPlace($id)
-//    {
-//
-//        // Retrieve the parking place
-//
-//        $parkingPlace = ParkingPlace::findOrFail($id);
-//
-//
-//        // Retrieve the parking spots for the parking place
-//        $spots = $parkingPlace->parkingSpots;
-//
-//
-//
-//
-//        return [
-//        'id' => $spots->id,
-//        'size_id'=>$spots->size->name,
-//        'floor'=>$spots->floor,
-//        'number'=>$spots->number,
-//        'attributes'=> $spots->spotAttributes
-//    ];
-//    }
-//    public function getSpotsByParkingPlace($id)
-//    {
-//        // Retrieve the parking place
-//        $parkingPlace = ParkingPlace::findOrFail($id);
-//
-//        // Retrieve the parking spots for the parking place
-//        $spots = $parkingPlace->parkingSpots;
-//
-//        // Create an array to hold the spot data
-//        $spotData = [];
-//
-//        // Loop through each parking spot and add its data to the array
-//        foreach ($spots as $spot) {
-//            $spotData[] = [
-//                'id' => $spot->id,
-//                'size_id' => $spot->size->name,
-//                'floor' => $spot->floor,
-//                'number' => $spot->number,
-//                'attributes' => $spot->spotAttributes->pluck('name')
-//            ];
-//        }
-//
-//        // Return the array of spot data
-//        return $spotData;
-//    }
     public function getSpotsByParkingPlace($id)
     {
         // Retrieve the parking place
