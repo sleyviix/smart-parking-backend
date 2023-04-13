@@ -88,9 +88,11 @@ class parkingPlaceController extends Controller
         return $sum;
     }
 
-    public function deleteParkingPlace(parkingPlace $parkingPlace)
+    public function deleteParkingPlace($id)
     {
+        $parkingPlace = parkingPlace::find($id);
         // Delete the user from the database
+
         $parkingPlace->delete();
 
         // Return a JSON response showing success
@@ -98,6 +100,8 @@ class parkingPlaceController extends Controller
             'message' => 'Parking Place deleted successfully',
         ], 200);
     }
+
+
 
 
 }
